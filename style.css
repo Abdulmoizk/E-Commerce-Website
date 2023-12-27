@@ -21,8 +21,8 @@ body {
     background-color: #fff !important;
     width: 100%;
     box-shadow: 0 2px 5px 1px rgba(64, 60, 67, .16);
-    position: fixed;
-    top: 0px;
+    /* position: fixed;
+    top: 0px; */
 }
 
 .btn {
@@ -56,7 +56,7 @@ body {
 }
 
 .mainpage {
-    margin-top: 8%;
+    /* margin-top: 8%; */
 }
 
 /* Modal Styles */
@@ -100,17 +100,23 @@ body {
     transform: scale(1.02);
 }
 
-.card {
+.shop-card .card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
 }
 
-.card:hover {
+.shop-card .card:hover {
     transform: scale(1.1);
 }
 
+.badge{
+    background-color: #E1C96B !important;
+}
 
-
+.card-header{
+    background-color: #B88319;
+    color: #fff;
+}
 
 /* scrollbtn */
 
@@ -130,6 +136,13 @@ body {
   #scrollToTopBtn:hover {
     background-color: #B88319;
   }
+
+/* fashion page */
+
+
+.fashion-card{
+    margin-top: 10%;
+}
 
 
 /* footer */
