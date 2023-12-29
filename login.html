@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://kit.fontawesome.com/1aeaed1404.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
-    <title>Jannat Collection | Kitchen Appliances</title>
+    <title>Jannat Collection</title>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
@@ -26,9 +28,17 @@
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                     <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#">Home</a>
                     </li>
-                  
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categories</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -36,45 +46,52 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="fashion.html">Fashion</a></li>
-                            <li><a class="dropdown-item" href="beauty&cosmetics.html">Beauty & Cosmetics</a></li>
-                            <li><a class="dropdown-item" href="mobile&accessories.html">Mobile & Accessories</a></li>
-                            <li><a class="dropdown-item" href="furniture&decore.html">Furniture & Decore</a></li>
-                            <li><a class="dropdown-item" href="kitchen&appliances.html">Kitchen Appliances</a></li>
+                            <li><a class="dropdown-item" href="#">Beauty & Cosmetics</a></li>
+                            <li><a class="dropdown-item" href="#">Mobile & Accessories</a></li>
+                            <li><a class="dropdown-item" href="#">Furniture & Decore</a></li>
+                            <li><a class="dropdown-item" href="#">Kitchen Appliances</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li>
-                  
+                    <li id="aboutBtn" class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li> -->
 
                 </ul>
                 <div class="d-flex gap-2">
-                    <button class="btn btn-primary">Register</button>
-                    <button class="btn btn-outline-primary">Login</button>
+                    <button class="btn btn-primary"><a href="register.html">Register</a></button>
+                    <button class="btn btn-outline-primary"><a href="login.html">Login</a></button>
 
                 </div>
             </div>
         </div>
     </nav>
     <div class="container">
-        <div class="row  py-4">
-            <div class="col ">
-                <div class="card">
-                    <h5 class="card-header text-center fw-bold ">Jannat Collection - Kitchen Appliances</h5>
-                    <div class="card-body">
-                        <h5 class="card-title">Kitchen Appliances</h5>
-                        <p class="card-text">Transform your kitchen into a culinary haven with our top-notch appliances,
-                            where innovation and efficiency meet the heart of your home.</p>
-                        <span class="badge">Kitchen</span>
-                        <span class="badge">Refrigeration</span>
-                        <span class="badge">Small Appliances</span>
-                    </div>
+        <div class="row py-4 justify-content-center">
+
+            <div class="col-5 ">
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
+                <div class="mb-3 form-check">
+                    <button id="loginBtn" class="btn btn-primary">Login</button>
+                </div>
+                <p>Don't have an account <a href="register.html"> Register now</a></p>
             </div>
         </div>
     </div>
-
-    <script src="app.js"></script>
+    <script src="app.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
+
 </html>

@@ -5,6 +5,11 @@
 
 * {
     font-family: 'montserrat';
+    
+}
+* a{
+    text-decoration: none;
+    color: #000 ;
 }
 
 body {
@@ -82,7 +87,9 @@ body {
     max-width: 600px;
     margin: 0 auto;
     text-align: center;
+ 
 }
+
 
 .close {
     position: absolute;
@@ -117,6 +124,18 @@ body {
     background-color: #B88319;
     color: #fff;
 }
+.card-footer{
+    text-decoration: none;
+    background-color: #B88319;
+    color: #fff;
+}
+.qty-btn button{
+    background-color: #fff;
+}
+.dashboard-img{
+    width: 200px;
+    height: 200px;
+}
 
 /* scrollbtn */
 
@@ -125,16 +144,18 @@ body {
     bottom: 20px;
     right: 20px;
     display: none;
-    background-color: none;
+    background: none;
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    transition: transform 0.3s ease-in-out;
   }
   
   #scrollToTopBtn:hover {
-    background-color: #B88319;
+    background: none;
+    transform: scale(1.2);
   }
 
 /* fashion page */
