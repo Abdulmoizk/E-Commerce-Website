@@ -42,65 +42,113 @@
 
                 </ul>
                 <div class="d-flex gap-2">
-                    
+
                     <button id="logoutBtn" class="btn btn-outline-primary">Logout</button>
 
                 </div>
             </div>
         </div>
     </nav>
-<div class="container">
+    <div class="container">
 
-    <div class="d-flex px-2 py-4 justify-content-between">
-        <h3>Categories</h3>
-        <button class="btn">Add new Category</button>
-    </div>
-</div>
+        <div class="d-flex px-2 py-4 justify-content-between">
+            <h3>Categories</h3>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add new Category
+            </button>
 
-<div class="container px-2 py-4">
-    <table class="table ">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Category</th>
-            <th scope="col">Variation</th>
-            <th scope="col">Industry</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Fashion</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Beauty & Cosmetics</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Furniture & Decore</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>Mobile & Accessories</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th scope="row">5   </th>
-            <td>Kitchen Appliances</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add new category</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Category Name</label>
+                                <input type="text" class="form-control" id="categoryName">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Variation</label>
+                                <input type="text" class="form-control" id="categoryVariation">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Industry</label>
+                                <input type="text" class="form-control" id="categoryIndustry">
+                            </div>
+                            <div class="mb-3">
+                                <label for="formFile" class="form- ">Category Logo</label>
+                                <input type="file" class="form-control mt-2" id="categoryLogo">
+                            </div>
+                            <div class="mb-3 ">
+                                <img class=" mt-2" width="100px" height="100px" id="selectedLogo" src="" alt="">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button id="submitcategory" type="button" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="container px-2 py-4">
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Logo</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Variation</th>
+                    <th scope="col">Industry</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td></td>
+                    <td>Fashion</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td></td>
+                    <td>Beauty & Cosmetics</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td></td>
+                    <td>Furniture & Decore</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td></td>
+                    <td>Mobile & Accessories</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">5 </th>
+                    <td></td>
+                    <td>Kitchen Appliances</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="category.js" type="module"></script>
     <script src="app.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

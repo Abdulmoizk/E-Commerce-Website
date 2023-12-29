@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 
 } from './firebase.js';
 
@@ -66,12 +67,12 @@ let login = () => {
       // Signed in 
       const user = userCredential.user;
       console.log(user)
-      if(user.email === "admin@gmail.com"){
+      if (user.email === "admin@gmail.com") {
         window.location = '/dashboard.html'
       } else {
         window.location = '/index.html'
       }
-      
+
       // ...
     })
     .catch((error) => {
@@ -96,7 +97,7 @@ let signup = () => {
       // Signed in 
       const user = userCredential.user;
       console.log(user)
-     
+
       // ...
     })
     .catch((error) => {
@@ -113,7 +114,7 @@ signupBtn && signupBtn.addEventListener('click', signup);
 
 //logout
 
-let logout = ()=>{
+let logout = () => {
   signOut(auth).then(() => {
     // Sign-out successful.
     window.location = '/index.html'
@@ -125,3 +126,16 @@ let logout = ()=>{
 
 let logoutBtn = document.getElementById("logoutBtn");
 logoutBtn && logoutBtn.addEventListener("click", logout)
+
+//userstate
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+
+    const uid = user.uid;
+    console.log("user login", user)
+    // ...
+  } else {
+    console.log("no user")
+  }
+});

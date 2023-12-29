@@ -4,8 +4,11 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
+
 
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
 
 const firebaseConfig = {
@@ -21,6 +24,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const storage = getStorage(app);
 
 
 export {
@@ -28,5 +32,10 @@ export {
   auth,
   createUserWithEmailAndPassword,
   signOut,
-  
+  onAuthStateChanged,
+  storage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL
+
 }
