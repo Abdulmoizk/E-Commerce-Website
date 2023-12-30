@@ -4,6 +4,13 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  collection,
+  addDoc,
+  db,
+  query,
+  where,
+  getDocs,
+
 
 } from './firebase.js';
 
@@ -133,9 +140,32 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
 
     const uid = user.uid;
-    console.log("user login", user)
+    console.log("user login")
     // ...
   } else {
     console.log("no user")
   }
 });
+
+
+const getAllCategories = async () => {
+  const indexShops = document.getElementById('index-shops');
+
+  const q = collection(db, "categories");
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+  indexShops.innerHTML += `
+  <div class="card" style="width: 18rem;">
+                    <img src="${doc.data().categoryLogo}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">${doc.data().name}</h5>
+                        <p class="card-text">${doc.data().variation}</p>
+                        <p class="card-text">${doc.data().industry}</p>
+                        <a href="fashion.html" class="btn btn-primary">Shop it</a>
+                    </div>
+                </div>
+  `  
+  });
+}
+getAllCategories();

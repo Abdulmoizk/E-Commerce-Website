@@ -9,6 +9,17 @@ import {
 
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+
+
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
 
 
 const firebaseConfig = {
@@ -25,7 +36,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const storage = getStorage(app);
-
+const appFirestore = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 export {
   signInWithEmailAndPassword,
@@ -36,6 +48,13 @@ export {
   storage,
   ref,
   uploadBytesResumable,
-  getDownloadURL
+  getDownloadURL,
+  collection,
+  addDoc,
+  db,
+  query,
+  where,
+  getDocs,
+
 
 }

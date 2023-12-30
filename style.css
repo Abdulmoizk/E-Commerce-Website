@@ -5,11 +5,12 @@
 
 * {
     font-family: 'montserrat';
-    
+
 }
-* a{
+
+* a {
     text-decoration: none;
-    color: #000 ;
+    color: #000;
 }
 
 body {
@@ -87,7 +88,7 @@ body {
     max-width: 600px;
     margin: 0 auto;
     text-align: center;
- 
+
 }
 
 
@@ -103,6 +104,7 @@ body {
     border-radius: 10px;
     transition: transform 0.3s ease-in-out;
 }
+
 .info:hover {
     transform: scale(1.02);
 }
@@ -116,29 +118,58 @@ body {
     transform: scale(1.1);
 }
 
-.badge{
+.badge {
     background-color: #E1C96B !important;
 }
 
-.card-header{
+.card-header {
     background-color: #B88319;
     color: #fff;
 }
-.card-footer{
+
+.card-footer {
     text-decoration: none;
     background-color: #B88319;
     color: #fff;
 }
-.qty-btn button{
+
+.qty-btn button {
     background-color: #fff;
 }
-.dashboard-img{
+
+.dashboard-img {
     width: 200px;
     height: 200px;
 }
-#selectedLogo{
+
+#selectedLogo, #selectedImage  {
     display: none;
 }
+
+.spinner-border {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+
+}
+
+#categorySpinner, #dishSpinner {
+    display: none;
+}
+.modal-body{
+    text-align: left;
+}
+#list-img , #product-image{
+width: 30px;
+height: 30px;
+border-radius: 50%;
+}
+.card-img-top{
+    object-fit: cover;
+    width: 100%;
+    height: 200px;
+}
+
 /* scrollbtn */
 
 #scrollToTopBtn {
@@ -153,17 +184,17 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
-  }
-  
-  #scrollToTopBtn:hover {
+}
+
+#scrollToTopBtn:hover {
     background: none;
     transform: scale(1.2);
-  }
+}
 
 /* fashion page */
 
 
-.fashion-card{
+.fashion-card {
     margin-top: 10%;
 }
 

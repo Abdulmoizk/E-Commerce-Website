@@ -54,12 +54,12 @@
         <div class="d-flex px-2 py-4 justify-content-between">
             <h3>Categories</h3>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#categoryModal">
                 Add new Category
             </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -69,28 +69,35 @@
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label class="form-label">Category Name</label>
-                                <input type="text" class="form-control" id="categoryName">
+                                <label class=" form-label">Category Name</label>
+                                <input type="text" class="form-control" required id="categoryName">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Variation</label>
-                                <input type="text" class="form-control" id="categoryVariation">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control" required  id="categoryVariation" rows="3"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Industry</label>
-                                <input type="text" class="form-control" id="categoryIndustry">
+                                <label class="form-label">Parent Category</label>
+                                <input type="text"  required class="form-control" id="categoryIndustry">
                             </div>
                             <div class="mb-3">
                                 <label for="formFile" class="form- ">Category Logo</label>
-                                <input type="file" class="form-control mt-2" id="categoryLogo">
+                                <input type="file"  required class="form-control mt-2" id="categoryLogo">
                             </div>
                             <div class="mb-3 ">
                                 <img class=" mt-2" width="100px" height="100px" id="selectedLogo" src="" alt="">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button id="submitcategory" type="button" class="btn btn-primary">Submit</button>
+                            <button id="closeBtn" type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                            <button id="submitcategory" type="button"
+                                class="btn btn-primary d-flex align-items-center gap-1">
+                                <div id="categorySpinner" class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                Submit
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -104,47 +111,14 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Logo</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Variation</th>
-                    <th scope="col">Industry</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Parent Category</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td></td>
-                    <td>Fashion</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td></td>
-                    <td>Beauty & Cosmetics</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td></td>
-                    <td>Furniture & Decore</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td></td>
-                    <td>Mobile & Accessories</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">5 </th>
-                    <td></td>
-                    <td>Kitchen Appliances</td>
-                    <td></td>
-                    <td></td>
-                </tr>
+            <tbody id="list-category" class="align-items-center">
+
+
             </tbody>
         </table>
     </div>
