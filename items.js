@@ -16,20 +16,31 @@ import {
 } from '/firebase.js'
 
 const getAllCategories = async () => {
-    const categorySelect = document.getElementById("category-select");
-    let index = 0;
-    const q = collection(db, "categories");
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        index++;
-        // console.log(doc.id, " => ", doc.data());
-        categorySelect.innerHTML += `
+    try {
+
+        const categorySelect = document.getElementById("category-select");
+        let index = 0;
+
+        const q = collection(db, "categories");
+        const querySnapshot = await getDocs(q);
+        let categories = [];
+        categorySelect.innerHTML = ""; 
+        querySnapshot.forEach((doc) => {
+            categories.push({ ...doc.data(), id: doc.id });
+            index++;
+            // console.log(doc.id, " => ", doc.data());
+            categorySelect.innerHTML += `
         <option  value="${doc.id}">${doc.data().name}</option>
         `
-    });
+        });
+        return new Promise((resolve, reject) => {
+            resolve(categories)
+        })
+    } catch (err) {
+        console.log("error", err);
+    }
 }
 getAllCategories();
-
 let uploadFile = (file, categoryName) => {
     return new Promise((resolve, reject) => {
         const storageRef = ref(storage, `images/${categoryName.split(" ").join("-")}`);
@@ -86,19 +97,19 @@ addProduct.addEventListener("click", async () => {
     const productPrice = document.getElementById("productPrice");
     const productDescription = document.getElementById("productDescription");
 
-    
+
     if (categorySelect.value === '' || productName.value === '' || productPrice.value === '' || productDescription.value === '' || productImage.value === '') {
         alert("Please fill out all required fields")
     } else {
         const dishSpinner = document.getElementById("dishSpinner");
         dishSpinner.style.display = "block"
-        const image = await uploadFile(productImage, productName.value)
+        const image = await uploadFile(productImage.files[0], productName.value)
         const productDetail = {
             category: categorySelect.value,
             name: productName.value,
             price: productPrice.value,
             description: productDescription.value,
-            
+
             image,
         }
         const docRef = await addDoc(collection(db, "products"), productDetail);
@@ -111,19 +122,31 @@ addProduct.addEventListener("click", async () => {
         selectedImage.style.display = "none";
         console.log(docRef)
         closeBtn.click()
+        getAllProducts()
     }
 })
 
 
+
+
+
 const getAllProducts = async () => {
+    const categories = await getAllCategories();
     const allProducts = document.getElementById("allProducts");
     allProducts.innerHTML = "";
     let index = 0;
+    let categoryNames = {};
+    for (var i=0; i < categories.length; i++){
+       categoryNames [categories[i].id] = categories[i].name
+    }
     const q = collection(db, "products");
     const querySnapshot = await getDocs(q);
+    
     querySnapshot.forEach((doc) => {
         index++;
-        console.log(doc.id, " => ", doc.data());
+        console.log(categoryNames[doc.data().category])
+        
+        
         allProducts.innerHTML += `
         <tr>
                     <th scope="row">1</th>
@@ -131,10 +154,10 @@ const getAllProducts = async () => {
                     <td>${doc.data().name}</td>
                     <td>${doc.data().description}</td>
                     <td>${doc.data().price}</td>
-                    <td>${doc.data().category}</td>
+                    <td>${categoryNames[doc.data().category]}</td>
                 </tr>
         `
-        console.log(doc.data(doc.id))
+       
     });
 }
 getAllProducts();

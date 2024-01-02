@@ -162,7 +162,7 @@ const getAllCategories = async () => {
                         <h5 class="card-title">${doc.data().name}</h5>
                         <p class="card-text">${doc.data().variation}</p>
                         <p class="card-text">${doc.data().industry}</p>
-                        <a href="fashion.html" class="btn btn-primary">Shop it</a>
+                        <a href="product.html?category=${doc.id}" class="btn btn-primary">Shop it</a>
                     </div>
                 </div>
   `  
