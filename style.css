@@ -184,17 +184,29 @@ body {
     height: 200px;
 }
 
-.pending{
+.pending {
     background-color: #b0d316 !important;
 }
-.delivered{
+
+.delivered {
     background-color: #1be025 !important;
 }
-.cancelled{
+
+.cancelled {
     background-color: #fa0505 !important;
 }
 
+#dashboardBtn {
+    display: none;
+}
 
+#no-user {
+    display: flex;
+}
+
+#login-user {
+    display: none;
+}
 
 /* .cart
 

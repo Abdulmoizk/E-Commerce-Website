@@ -420,7 +420,7 @@ const getCartItems = () => {
                                         <span class="card-text">Rs: ${cartItems[i].price} /- </span>
                                         <p class="card-text">Quantity: ${cartItems[i].qty}</p>
                                         <strong class="card-text">Total: ${cartItems[i].price *
-                                        cartItems[i].qty}</strong>
+                cartItems[i].qty}</strong>
                                     </div>
                                 </div>
                                 </div>
@@ -432,3 +432,39 @@ const getCartItems = () => {
     }
 };
 getCartItems()
+
+
+const getAllCategories = async () => {
+    const categoryList = document.getElementById('category-list');
+    const q = collection(db, "categories");
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        categoryList.innerHTML += `
+    <li><a class="dropdown-item" href="product.html?category=${doc.id}">${doc.data().name}</a></li>
+    `
+    });
+}
+getAllCategories();
+
+
+import {
+    auth,
+    onAuthStateChanged,
+
+} from './firebase.js';
+
+
+
+onAuthStateChanged(auth, (user) => {
+
+    const dashboardBtn = document.getElementById("dashboardBtn");
+    if (user) {
+        if (user.email === "admin@gmail.com") {
+            dashboardBtn.style.display = "block";
+            console.log("runningauth")
+        }
+        const uid = user.uid;
+        // ...
+    }
+});

@@ -150,12 +150,14 @@ onAuthStateChanged(auth, (user) => {
 
 const getAllCategories = async () => {
   const indexShops = document.getElementById('index-shops');
+  const categoryList = document.getElementById('category-list');
+
 
   const q = collection(db, "categories");
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-  indexShops.innerHTML += `
+    console.log(doc.id, " => ", doc.data());
+    indexShops.innerHTML += `
   <div class="card" style="width: 18rem;">
                     <img src="${doc.data().categoryLogo}" class="card-img-top" alt="">
                     <div class="card-body">
@@ -165,7 +167,32 @@ const getAllCategories = async () => {
                         <a href="product.html?category=${doc.id}" class="btn btn-primary">Shop it</a>
                     </div>
                 </div>
-  `  
+  `
+    categoryList.innerHTML += `
+  <li><a class="dropdown-item" href="product.html?category=${doc.id}">${doc.data().name}</a></li>
+  `
   });
 }
 getAllCategories();
+
+
+
+
+
+onAuthStateChanged(auth, (user) => {
+ 
+  const dashboardBtn = document.getElementById("dashboardBtn");
+  if (user) {
+    if (user.email === "admin@gmail.com") {
+      dashboardBtn.style.display = "block";
+      console.log("runningauth")
+      
+    }
+
+    const uid = user.uid;
+    // ...
+  } else {
+
+  
+  }
+});
