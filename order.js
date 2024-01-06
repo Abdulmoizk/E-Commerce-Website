@@ -67,6 +67,15 @@ const getAllOrders = async () => {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
         index++;
+        let status = doc.data().status
+        let statusColor = ""
+        if (status === 'pending') {
+            statusColor = "pending";
+        } else if (status === 'delivered ') {
+            statusColor = "delivered";
+        } else {
+            statusColor = "cancelled";
+        }
         // console.log(doc.id, " => ", doc.data());
         allOrders.innerHTML += `
         <tr>
@@ -74,7 +83,7 @@ const getAllOrders = async () => {
         <td>${doc.data().customerName}</td>
         <td>${doc.data().customerContact}</td>
         <td>${doc.data().customerAddress}</td>
-        <td><span class="badge">${doc.data().status}</span></td>
+        <td><span class="badge ${statusColor}">${doc.data().status}</span></td>
         <td>${doc.data().totalAmount} /-</td>
 
         <td><button onclick="viewOrderDetails('${doc.id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -82,22 +91,24 @@ const getAllOrders = async () => {
       </button></td>
         </tr>
         `
+
     });
 }
 getAllOrders();
-
+let updateOrderID;
 const viewOrderDetails = async (id) => {
+    updateOrderID = id;
     const cart = document.getElementById("cart");
     const orderStatus = document.getElementById("orderStatus");
 
-    cart.innerHTML="";
+    cart.innerHTML = "";
     const docRef = doc(db, "orders", id);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
         console.log("Document data:", docSnap.data());
         const cartItems = docSnap.data().cart;
-        orderStatus.value= docSnap.data().status
+        orderStatus.value = docSnap.data().status
         for (var i = 0; i < cartItems.length; i++) {
             cart.innerHTML += `
         <div class="d-flex flex-column gap-2">
@@ -116,7 +127,7 @@ const viewOrderDetails = async (id) => {
                                     <span class="card-text">Rs: ${cartItems[i].price} /- </span>
                                     <p class="card-text">Quantity: ${cartItems[i].qty}</p>
                                     <strong class="card-text">Total: ${cartItems[i].price *
-                                    cartItems[i].qty}</strong>
+                cartItems[i].qty}</strong>
                                 </div>
                             </div>
                             </div>
@@ -133,5 +144,17 @@ const viewOrderDetails = async (id) => {
 
 window.viewOrderDetails = viewOrderDetails;
 
+const updateBtn = document.getElementById("updateBtn");
+updateBtn.addEventListener("click", async () => {
+    const orderStatus = document.getElementById("orderStatus");
+    const closeBtn = document.getElementById("closeBtn");
+    const docRef = doc(db, "orders", updateOrderID);
 
-const updateBtn = document.getElementById("updateBtn")
+    // Set the "capital" field of the city 'DC'
+    await updateDoc(docRef, {
+        status: orderStatus.value,
+    });
+    closeBtn.click()
+    getAllOrders();
+
+})

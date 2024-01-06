@@ -184,6 +184,17 @@ body {
     height: 200px;
 }
 
+.pending{
+    background-color: #b0d316 !important;
+}
+.delivered{
+    background-color: #1be025 !important;
+}
+.cancelled{
+    background-color: #fa0505 !important;
+}
+
+
 
 /* .cart
 
