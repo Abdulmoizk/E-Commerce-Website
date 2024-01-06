@@ -262,53 +262,10 @@ import {
 } from '/firebase.js';
 var urlParams = new URLSearchParams(window.location.search);
 
-const getAllProducts = async () => {
-    const allProducts = document.getElementById("allProducts");
-    const q = query(collection(db, "products"), where('category', '==', urlParams.get('category')));
-    const querySnapshot = await getDocs(q);
-    allProducts.innerHTML = "";
-    querySnapshot.forEach((doc) => {
-        allProducts.innerHTML += `
-        <div class="col-6">
-                <div class="card fashion-card w-100 mb-3">
-                    <div class="row ">
-                        <div class="d-flex  justify-content-between align-items-center ">
-                            <div class="d-flex align-items-center ">
-                                <div class="">
-                                    <img src="${doc.data().image}"  class="m-1 img-fashion rounded"
-                                        alt="...">
-                                </div>
-                                <div class="">
-                                    <div class="card-body">
-                                        <h5 class="card-title"></h5>
-                                        <p class="card-text">${doc.data().name}</p>
-                                        <p class="card-text">${doc.data().description}</p>
-                                        <h3 class="card-text">Rs ${doc.data().price}/-</h3>
-                                        <p class="card-text"><small class="text-body-secondary">MS</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="fw-bold d-flex text-center gap-2 me-2 flex-column">
-                                <div class="qty-btn">
 
-                                    <button  class="btn "><i class="fa-solid fa-plus"></i></button>
-                                    <span>1</span>
-                                    <button  class="btn "><i class="fa-solid fa-minus"></i></button>
-                                </div>
-                                <button  class="btn ">Add to cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `
-
-    });
-}
-getAllProducts();
 
 const getCategory = async () => {
-    const productHeader= document.getElementById('product-header'); 
+    const productHeader = document.getElementById('product-header');
     const docRef = doc(db, "categories", urlParams.get('category'));
     const docSnap = await getDoc(docRef);
 
@@ -339,6 +296,139 @@ const getCategory = async () => {
         // docSnap.data() will be undefined in this case
         console.log("No such document!");
     }
+};
+
+
+getCategory();
+
+let allaProducts = [];
+
+const getAllProducts = async () => {
+    const allProducts = document.getElementById("allProducts");
+    const q = query(collection(db, "products"), where('category', '==', urlParams.get('category')));
+    const querySnapshot = await getDocs(q);
+    allProducts.innerHTML = "";
+    let products = [];
+    querySnapshot.forEach((doc) => {
+        products.push({ ...doc.data(), id: doc.id })
+        allProducts.innerHTML += `
+        <div class="d-flex m-2 justify-content-between align-items-center ">
+        <div class="d-flex align-items-center gap-2 ">
+            <div class="">
+                <img src="${doc.data().image}" class="m-1 img-fashion rounded" alt="...">
+            </div>
+            <div class="">
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">${doc.data().name}</p>
+                    <p class="card-text">${doc.data().description}</p>
+                    <h3 class="card-text">Rs ${doc.data().price}/-</h3>
+                    <p class="card-text"><small class="text-body-secondary">MS</small></p>
+                </div>
+            </div>
+        </div>
+        <div class="fw-bold d-flex text-center gap-3 me-2 align-items-center flex-column">
+            <div class="qty-btn d-flex align-items-center gap-2">
+
+                <button onclick="updateQty('+', '${doc.id}')" class="btn "><i
+                        class="fa-solid fa-plus"></i></button>
+                <span id="${doc.id}">1</span>
+                <button onclick="updateQty('-', '${doc.id}')" class="btn "><i
+                        class="fa-solid fa-minus"></i></button>
+            </div>
+            <div>
+                <button class="btn " onclick="addtoCart('${doc.id}')">Add to cart</button>
+            </div>
+        </div>
+    </div><hr>
+        `
+
+    });
+    allaProducts = products;
+}
+getAllProducts();
+
+const updateQty = (type, id) => {
+    const qty = document.getElementById(id);
+    if (Number(qty.innerHTML) < 2 && type === "-") {
+        return;
+    }
+    if (type === "+") {
+        qty.innerHTML = Number(qty.innerHTML) + 1
+    } else {
+        qty.innerHTML = Number(qty.innerHTML) - 1
+    }
 }
 
-getCategory()
+window.updateQty = updateQty;
+
+
+const addtoCart = (id) => {
+    const cartItems = localStorage.getItem("cart");
+    const cart = cartItems ? JSON.parse(cartItems) : [];
+    const qty = document.getElementById(id);
+    const product = allaProducts.filter(v => v.id === id)
+    console.log(product[0])
+    cart.push({ ...product[0], qty: Number(qty.innerHTML) })
+    localStorage.setItem("cart", JSON.stringify(cart))
+    getCartItems()
+    orderAmount()
+
+}
+
+const orderAmount = () => {
+    const cartItems = JSON.parse(localStorage.getItem('cart'));
+    const totalAmount = document.getElementById("totalAmount");
+    const sum = cartItems.reduce((a, b) => a + Number(b.price) * b.qty, 0)
+    totalAmount.innerHTML = `Rs: ${sum + 100} /-`
+}
+
+window.addtoCart = addtoCart;
+
+const deleteCartItem = (i) => {
+    const cartItems = JSON.parse(localStorage.getItem('cart'));
+    cartItems.splice(Number(i), 1);
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+    getCartItems();
+    orderAmount()
+
+}
+window.deleteCartItem = deleteCartItem;
+
+const getCartItems = () => {
+    const cartItems = JSON.parse(localStorage.getItem('cart'));
+    const cart = document.getElementById("cart");
+    cart.innerHTML = "";
+    if (cartItems) {
+        for (var i = 0; i < cartItems.length; i++) {
+            console.log(cartItems[i].name);
+            // cart.innerHTML = ""
+            cart.innerHTML += `
+            <div class="d-flex flex-column gap-2">
+                        <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center" >
+                        <h5 class="mt-2  fw-bold ">${cartItems[i].name}</h5>
+                        <a class="btn" onclick="deleteCartItem(${i})" style="color: #fff;" href="#"><i  class="fa-solid fa-trash"></i></a> 
+                        </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <div>
+                                    <img src="${cartItems[i].image}" class="img-fashion" alt="">
+                                </div>
+                                <div>
+                                    <div class="card-body">
+                                        <p class="card-title">${cartItems[i].description}</p>
+                                        <span class="card-text">Rs: ${cartItems[i].price} /- </span>
+                                        <p class="card-text">Quantity: ${cartItems[i].qty}</p>
+                                        <strong class="card-text">Total: ${cartItems[i].price *
+                                        cartItems[i].qty}</strong>
+                                    </div>
+                                </div>
+                                </div>
+                               
+                        </div>
+                    </div>
+            `
+        }
+    }
+};
+getCartItems()

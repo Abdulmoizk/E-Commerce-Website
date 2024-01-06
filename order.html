@@ -19,7 +19,8 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img width="200" height="60" src="images/Jannat Collection.png" alt=""></a>
+            <a class="navbar-brand" href="index.html"><img width="200" height="60" src="images/Jannat Collection.png"
+                    alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -28,16 +29,16 @@
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                     <li class="nav-item">
-                        <a class="nav-link active" href="dashboard.html">Dashboard</a>
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="category.html">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="items.html">Item</a>
+                        <a class="nav-link " href="items.html">Item</a>
                     </li>
                     <li id="aboutBtn" class="nav-item">
-                        <a class="nav-link" href="order.html">Order</a>
+                        <a class="nav-link active" href="order.html">Order</a>
                     </li>
 
                 </ul>
@@ -50,61 +51,61 @@
         </div>
     </nav>
     <div class="container">
-        <div class="row px-2 py-4">
-            <div class="col card">
-                <div class="card-body text-center ">
-                    <h2>SHARE YOUR EXPERIENCE WITH JANNAT COLLECTION</h2>
-                </div>
-                <div class="row p-3 gap-2">
-                    <div class="col-5 card card-body  justify-content-between">
-                        <div class="d-flex align-items-center gap-3">
-                            <img width="50px" class="rounded-5" src="images/JC-footer.png" alt="">
-                            <h5>Jannat Collection</h5>
-                        </div>
-                        <div class="mt-2 justify-content-between fw-bold">
-                            <div class="d-flex justify-content-between">
-                                <p>Revenue </p>
-                                <span>35056.89</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <p>Visitors </p>
-                                <span>135</span>
-                            </div>
-                        </div>
 
-                    </div>
-
-                    <div class="col-5 dashboard-img  card card-body ">
-                        <img class=" img-fluid" src="images/Jannat Collection.png" alt="">
-                    </div>
-                </div>
-            </div>
+        <div class="d-flex px-2 py-4 justify-content-between">
+            <h3>Order</h3>
         </div>
-        <div class="col card p-3">
-            <h3>Performance Indicator</h3>
-            <div class="d-flex mt-4 gap-3">
-                <div class="card p-3">
-                    <h5>Pending Orders</h5>
-                    <strong>5</strong>
-                </div>
-                <div class="card p-3">
-                    <h5>Ready to ship</h5>
-                    <strong>15</strong>
-                </div>
-                <div class="card p-3">
-                    <h5>Pending Return</h5>
-                    <strong>0</strong>
-                </div>
-                <div class="card p-3">
-                    <h5>New Reviews</h5>
-                    <strong>36</strong>
-                </div>
-            </div>
-        </div>
-
     </div>
 
-<script src="dashboard.js" type="module"></script>
+    <div class="container px-2 py-4">
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Customer name</th>
+                    <th scope="col">Customer Contact</th>
+                    <th scope="col">Customer address</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Total Amount</th>
+                    <th scope="col">Order details</th>
+                </tr>
+            </thead>
+            <tbody id="allOrders">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Order details</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body d-flex flex-column gap-2  p-2">
+                        <div class="d-flex flex-column gap-2">
+                            <div id="cart" class="card">
+                            </div>
+                            <select id="orderStatus" class="form-select" aria-label="Default select example">
+                                <option selected>Select order status</option>
+                                <option value="pending">Pending</option>
+                                <option value="delivered">Delivered</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="updateBtn" class="btn btn-primary">Update Order</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="order.js" type="module"></script>
     <!-- <script src="app.js" type="module"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

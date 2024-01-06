@@ -63,21 +63,87 @@
     <div class="container">
         <div class="row  py-4">
             <div id="product-header" class="col ">
-                
+
             </div>
         </div>
     </div>
 
     <div class="container">
-        <div id="allProducts" class="row">
+        <div class="d-flex gap-3 ">
+            <div class="col-8">
+                <div id="allProducts" class="card w-100 ">
 
 
+                </div>
+            </div>
+            <div class="col-4 card">
+                <div id="cart" class="modal-body d-flex flex-column gap-2  p-2">
+                </div>
+                <div class="mt-3 card-footer text-center">
+                    <button type="button" class="btn cart-button fw-bold" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Checkout
+                    </button>
 
-
+                </div>
+            </div>
         </div>
     </div>
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Cart</h1>
+                    <button id="closeBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="cart" class="modal-body d-flex flex-column gap-2">
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Name</label>
+                        <input id="customerName" type="text" class="form-control" placeholder="Enter your name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Contact</label>
+                        <input id="customerContact" type="number" class="form-control"
+                            placeholder="Enter your contact number">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Address</label>
+                        <textarea id="customerAddress" class="form-control" placeholder="Enter your address"
+                            rows="3"></textarea>
+
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>Delivery charges:</span>
+                    <span class="fw-bold">Rs: 100 /-</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>Total amount:</span>
+                    <span id="totalAmount" class="fw-bold">Rs:  /-</span>
+                </div>
+                <div class="modal-footer justify-content-center">
+
+                    <button id="placeorder" class="btn btn-primary d-flex align-items-center gap-1">
+                        <div id="placeOderSpinner" class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        Place order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- <script src="app.js"></script> -->
     <script src="product.js" type="module"></script>
+    <script src="order.js" type="module"></script>
+
 </body>
 
 </html>

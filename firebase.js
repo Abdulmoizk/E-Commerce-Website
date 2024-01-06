@@ -16,8 +16,11 @@ import {
   query,
   where,
   getDocs,
-  getDoc ,
+  getDoc,
   doc,
+  updateDoc,
+  serverTimestamp,
+
 
 
 
@@ -58,7 +61,10 @@ export {
   query,
   where,
   getDocs,
-  getDoc ,
-doc,
+  getDoc,
+  doc,
+  updateDoc,
+  serverTimestamp,
+
 
 }
