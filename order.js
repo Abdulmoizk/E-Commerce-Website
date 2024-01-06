@@ -13,6 +13,32 @@ import {
 
 } from '/firebase.js';
 
+
+
+import {
+    auth,
+    onAuthStateChanged ,
+  
+  } from './firebase.js';
+  
+
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+      if(user.email !== "admin@gmail.com"){
+        window.location = '/index.html'
+      }
+      const uid = user.uid;
+      // ...
+    } else {
+        window.location = '/index.html'
+    }
+  });
+  
+
+
+
+
 const placeorder = document.getElementById("placeorder");
 placeorder && placeorder.addEventListener("click", async () => {
     const customerName = document.getElementById("customerName");
