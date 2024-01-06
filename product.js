@@ -257,6 +257,7 @@ import {
     db,
     getDoc,
     doc,
+    signOut,
 
 
 } from '/firebase.js';
@@ -466,5 +467,38 @@ onAuthStateChanged(auth, (user) => {
         }
         const uid = user.uid;
         // ...
+    }
+});
+
+
+let logout = () => {
+    signOut(auth).then(() => {
+        // Sign-out successful.
+        window.location = '/index.html'
+    }).catch((error) => {
+        // An error happened
+    });
+}
+
+window.logout = logout;
+
+onAuthStateChanged(auth, (user) => {
+    const userState = document.getElementById("userState");
+    const dashboardBtn = document.getElementById("dashboardBtn");
+    if (user) {
+        if (user.email === "admin@gmail.com") {
+            dashboardBtn.style.display = "block";
+            console.log("runningauth")
+        }
+        userState.innerHTML = `
+                  <button onclick="logout()" class="btn login-user btn-primary">Logout</button>      
+    `
+        const uid = user.uid;
+        // ...
+    } else {
+        userState.innerHTML = `
+                      <button  class="btn btn-primary"><a href="register.html">Register</a></button>
+                      <button   class="btn btn-outline-primary"><a href="login.html">Login</a></button>
+    `
     }
 });

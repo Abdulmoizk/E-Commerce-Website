@@ -129,6 +129,7 @@ let logout = () => {
     // An error happened
   });
 }
+window.logout = logout;
 
 
 let logoutBtn = document.getElementById("logoutBtn");
@@ -156,7 +157,7 @@ const getAllCategories = async () => {
   const q = collection(db, "categories");
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data());
+    // console.log(doc.id, " => ", doc.data());
     indexShops.innerHTML += `
   <div class="card" style="width: 18rem;">
                     <img src="${doc.data().categoryLogo}" class="card-img-top" alt="">
@@ -180,19 +181,22 @@ getAllCategories();
 
 
 onAuthStateChanged(auth, (user) => {
- 
+  const userState = document.getElementById("userState");
   const dashboardBtn = document.getElementById("dashboardBtn");
   if (user) {
     if (user.email === "admin@gmail.com") {
       dashboardBtn.style.display = "block";
       console.log("runningauth")
-      
     }
-
+    userState.innerHTML = `
+                  <button onclick="logout()" class="btn login-user btn-primary">Logout</button>      
+    `
     const uid = user.uid;
     // ...
   } else {
-
-  
+    userState.innerHTML = `
+                    <button  class="btn btn-primary"><a href="register.html">Register</a></button>
+                    <button   class="btn btn-outline-primary"><a href="login.html">Login</a></button>
+  `
   }
 });

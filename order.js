@@ -9,6 +9,7 @@ import {
     doc,
     serverTimestamp,
     updateDoc,
+    signOut
 
 
 } from '/firebase.js';
@@ -17,26 +18,37 @@ import {
 
 import {
     auth,
-    onAuthStateChanged ,
-  
-  } from './firebase.js';
-  
+    onAuthStateChanged,
+
+} from './firebase.js';
+
 
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-      if(user.email !== "admin@gmail.com"){
-        window.location = '/index.html'
-      }
-      const uid = user.uid;
-      // ...
+        if (user.email !== "admin@gmail.com") {
+            window.location = '/index.html'
+        }
+        const uid = user.uid;
+        // ...
     } else {
         window.location = '/index.html'
     }
-  });
+});
+
+
+let logout = () => {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      window.location = '/index.html'
+    }).catch((error) => {
+      // An error happened
+    });
+  }
   
-
-
+  let logoutBtn = document.getElementById("logoutBtn");
+  logoutBtn && logoutBtn.addEventListener("click", logout)
+  
 
 
 const placeorder = document.getElementById("placeorder");
@@ -87,23 +99,24 @@ placeorder && placeorder.addEventListener("click", async () => {
 
 const getAllOrders = async () => {
     const allOrders = document.getElementById("allOrders")
-    allOrders.innerHTML = "";
-    let index = 0;
-    const q = collection(db, "orders");
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        index++;
-        let status = doc.data().status
-        let statusColor = ""
-        if (status === 'pending') {
-            statusColor = "pending";
-        } else if (status === 'delivered ') {
-            statusColor = "delivered";
-        } else {
-            statusColor = "cancelled";
-        }
-        // console.log(doc.id, " => ", doc.data());
-        allOrders.innerHTML += `
+    if (allOrders) {
+        allOrders.innerHTML = "";
+        let index = 0;
+        const q = collection(db, "orders");
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            index++;
+            let status = doc.data().status
+            let statusColor = ""
+            if (status === 'pending') {
+                statusColor = "pending";
+            } else if (status === 'delivered ') {
+                statusColor = "delivered";
+            } else {
+                statusColor = "cancelled";
+            }
+            // console.log(doc.id, " => ", doc.data());
+            allOrders.innerHTML += `
         <tr>
         <th scope="row">${index}</th>
         <td>${doc.data().customerName}</td>
@@ -111,14 +124,14 @@ const getAllOrders = async () => {
         <td>${doc.data().customerAddress}</td>
         <td><span class="badge ${statusColor}">${doc.data().status}</span></td>
         <td>${doc.data().totalAmount} /-</td>
-
         <td><button onclick="viewOrderDetails('${doc.id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
        View details
       </button></td>
         </tr>
         `
 
-    });
+        });
+    }
 }
 getAllOrders();
 let updateOrderID;
@@ -171,7 +184,7 @@ const viewOrderDetails = async (id) => {
 window.viewOrderDetails = viewOrderDetails;
 
 const updateBtn = document.getElementById("updateBtn");
-updateBtn.addEventListener("click", async () => {
+updateBtn && updateBtn.addEventListener("click", async () => {
     const orderStatus = document.getElementById("orderStatus");
     const closeBtn = document.getElementById("closeBtn");
     const docRef = doc(db, "orders", updateOrderID);
