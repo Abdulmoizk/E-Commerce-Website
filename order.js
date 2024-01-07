@@ -110,7 +110,7 @@ const getAllOrders = async () => {
             let statusColor = ""
             if (status === 'pending') {
                 statusColor = "pending";
-            } else if (status === 'delivered ') {
+            } else if (status === 'delivered') {
                 statusColor = "delivered";
             } else {
                 statusColor = "cancelled";
