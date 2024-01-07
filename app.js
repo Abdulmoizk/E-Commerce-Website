@@ -158,7 +158,8 @@ const getAllCategories = async () => {
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
     // console.log(doc.id, " => ", doc.data());
-    indexShops.innerHTML += `
+    if (indexShops) {
+      indexShops.innerHTML += `
   <div class="card" style="width: 18rem;">
                     <img src="${doc.data().categoryLogo}" class="card-img-top" alt="">
                     <div class="card-body">
@@ -169,9 +170,9 @@ const getAllCategories = async () => {
                     </div>
                 </div>
   `
-    categoryList.innerHTML += `
+      categoryList.innerHTML += `
   <li><a class="dropdown-item" href="product.html?category=${doc.id}">${doc.data().name}</a></li>
-  `
+  `}
   });
 }
 getAllCategories();
