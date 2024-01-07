@@ -96,7 +96,7 @@ submitcategory && submitcategory.addEventListener("click", async () => {
     const categoryVariation = document.getElementById("categoryVariation");
     const categoryIndustry = document.getElementById("categoryIndustry");
 
-    if (categoryName.value === "" || categoryVariation.value === "" || categoryIndustry.value === "") {
+    if (categoryName.value === "" || categoryVariation.value === "" || categoryIndustry.value === "" || logo.value === "" ) {
         alert("Please fill out all required fields")
     } else {
 
