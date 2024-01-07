@@ -22,7 +22,7 @@ import {
 
 } from './firebase.js';
 
-
+if(location.pathname === "order.html"){
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -34,7 +34,7 @@ onAuthStateChanged(auth, (user) => {
     } else {
         window.location = '/index.html'
     }
-});
+});}
 
 
 let logout = () => {
