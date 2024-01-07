@@ -457,17 +457,17 @@ import {
 
 
 
-onAuthStateChanged(auth, (user) => {
-    const dashboardBtn = document.getElementById("dashboardBtn");
-    if (user) {
-        if (user.email === "admin@gmail.com") {
-            dashboardBtn.style.display = "block";
-            console.log("runningauth")
-        }        
-        const uid = user.uid;
-        // ...
-    }
-});
+// onAuthStateChanged(auth, (user) => {
+//     const dashboardBtn = document.getElementById("dashboardBtn");
+//     if (user) {
+//         if (user.email === "admin@gmail.com") {
+//             dashboardBtn.style.display = "block";
+//             console.log("runningauth")
+//         }        
+//         const uid = user.uid;
+//         // ...
+//     }
+// });
 
 
 let logout = () => {
