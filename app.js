@@ -111,6 +111,7 @@ let signup = () => {
       // Signed in 
       const user = userCredential.user;
       console.log(user)
+      window.location = '/index.html'
 
       // ...
     })
