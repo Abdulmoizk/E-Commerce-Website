@@ -195,9 +195,11 @@ onAuthStateChanged(auth, (user) => {
     const uid = user.uid;
     // ...
   } else {
-    userState.innerHTML = `
+    if (userState) {
+      userState.innerHTML = `
                     <button  class="btn btn-primary"><a href="register.html">Register</a></button>
                     <button   class="btn btn-outline-primary"><a href="login.html">Login</a></button>
   `
+}
   }
 });
