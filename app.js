@@ -73,6 +73,7 @@ let login = () => {
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
+      
       console.log(user)
       if (user.email === "admin@gmail.com") {
         window.location = '/dashboard.html'
@@ -85,7 +86,13 @@ let login = () => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(errorMessage)
+      // console.log(errorMessage)
+      Swal.fire({
+        icon: "error",
+        title: "Try again",
+        text: errorMessage,
+
+      });
     });
 
 }
@@ -111,6 +118,12 @@ let signup = () => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorMessage)
+      Swal.fire({
+        icon: "error",
+        title: "Try again",
+        text: errorMessage,
+
+      });
     });
 
 }
